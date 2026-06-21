@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>世界杯赛程知识库 · 持续关注指南</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(145deg, #fce9d7 0%, #f8d5ba 50%, #f3c3a3 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1.2rem;
+        }
+
+        .knowledge-container {
+            max-width: 1100px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 1.8rem;
+        }
+
+        /* 主卡片 - 暖白柔和 */
+        .card {
+            background: rgba(255, 250, 245, 0.92);
+            backdrop-filter: blur(2px);
+            border-radius: 2.5rem;
+            padding: 2.2rem 2.6rem;
+            box-shadow: 0 12px 28px rgba(160, 100, 60, 0.13), 0 4px 12px rgba(180, 120, 70, 0.08);
+            transition: all 0.2s ease;
+            border: 1px solid rgba(255, 240, 225, 0.6);
+        }
+
+        .card:hover {
+            box-shadow: 0 16px 36px rgba(150, 90, 50, 0.18);
+            background: rgba(255, 251, 247, 0.96);
+        }
+
+        /* 标题体系 */
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: #6a3f2b;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .section-title small {
+            font-size: 1rem;
+            font-weight: 400;
+            color: #9f7a62;
+            margin-left: 0.5rem;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #714a33;
+            margin-bottom: 0.9rem;
+            border-left: 5px solid #d9a77c;
+            padding-left: 1rem;
+        }
+
+        h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #7a543c;
+            margin-bottom: 0.5rem;
+        }
+
+        p {
+            color: #3f2b1f;
+            line-height: 1.7;
+            font-size: 1.05rem;
+            margin-bottom: 0.9rem;
+        }
+
+        .text-muted {
+            color: #7d5f4b;
+        }
+
+        /* 链接按钮感 */
+        .btn-link {
+            display: inline-block;
+            background: #e7c9b2;
+            color: #4e3122;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.4rem 1.2rem;
+            border-radius: 40px;
+            transition: all 0.2s;
+            border: 1px solid #dbb396;
+            font-size: 0.95rem;
+        }
+
+        .btn-link:hover {
+            background: #ddb693;
+            color: #2f1e14;
+            border-color: #c99a78;
+            transform: scale(1.02);
+            box-shadow: 0 4px 10px rgba(160, 100, 55, 0.2);
+        }
+
+        a.natural-link {
+            color: #9b5f3a;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 2px solid #dbb396;
+            transition: border-color 0.2s, color 0.2s;
+        }
+
+        a.natural-link:hover {
+            color: #6d3d23;
+            border-bottom-color: #b57c58;
+        }
+
+        /* 目录感网格布局 */
+        .directory-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.4rem;
+            margin: 1.5rem 0 0.8rem;
+        }
+
+        .dir-item {
+            background: #fcf3ea;
+            border-radius: 2rem;
+            padding: 1.2rem 1rem 1rem 1.4rem;
+            border-left: 6px solid #d9a77c;
+            transition: background 0.2s;
+        }
+
+        .dir-item strong {
+            display: block;
+            font-size: 1.15rem;
+            color: #5d3a27;
+            margin-bottom: 0.2rem;
+        }
+
+        .dir-item span {
+            font-size: 0.9rem;
+            color: #7a5b47;
+        }
+
+        .dir-item:hover {
+            background: #f5e4d5;
+        }
+
+        /* 提示块 / FAQ 摘要 */
+        .tip-block {
+            background: #f6e7db;
+            border-radius: 1.8rem;
+            padding: 1.4rem 1.8rem;
+            margin: 1.6rem 0 0.6rem;
+            border-left: 4px solid #c79671;
+        }
+
+        .faq-mini {
+            display: flex;
+            flex-direction: column;
+            gap: 0.9rem;
+            margin: 1.2rem 0;
+        }
+
+        .faq-q {
+            background: #fcf0e6;
+            padding: 0.8rem 1.2rem;
+            border-radius: 2rem;
+            border: 1px solid #ebd3c0;
+        }
+
+        .faq-q strong {
+            color: #5e3926;
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        .faq-q p {
+            margin: 0;
+            font-size: 0.95rem;
+        }
+
+        /* 底部信息 */
+        .footer-note {
+            margin-top: 0.8rem;
+            font-size: 0.9rem;
+            text-align: center;
+            color: #7f644f;
+            border-top: 1px solid #e2cdbb;
+            padding-top: 1.5rem;
+        }
+
+        /* 响应式 */
+        @media (max-width: 640px) {
+            .card {
+                padding: 1.6rem 1.2rem;
+                border-radius: 2rem;
+            }
+            .section-title {
+                font-size: 1.5rem;
+            }
+            h2 {
+                font-size: 1.3rem;
+            }
+            .directory-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            .tip-block {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="knowledge-container">
+
+        <!-- hero 卡片：再次访问 & 收藏的意义 -->
+        <div class="card">
+            <div class="section-title">
+                📚 赛程知识库
+                <small>· 持续关注 · 随时回溯</small>
+            </div>
+            <p>
+                对于长期关注足球赛程的爱好者来说，最重要的不是一次性浏览，而是<strong>建立稳定的获取路径</strong>。
+                当大赛周期拉长、小组交错、淘汰赛时间频繁变动时，一个可靠的赛程信息源就显得格外珍贵。
+                很多朋友在赛季中会反复回到同一个页面——不是为了猎奇，而是为了确认下一场关键战的日期与场地。
+                因此，将 <a href="https://cn-wcschedule.com" class="natural-link">世界杯赛程</a> 加入浏览器收藏夹，
+                相当于为自己设置了一个直达时间表的快捷通道，省去每次重新搜索的精力。
+            </p>
+            <p>
+                如果你曾经访问过这个站点，你可能会注意到它的信息结构一直保持清晰克制：没有弹窗干扰，
+                没有冗余广告，只有比赛时间、对阵双方和阶段说明。这正是适合反复查阅的设计。
+            </p>
+        </div>
+
+        <!-- 目录感布局：信息分区说明 -->
+        <div class="card">
+            <h2>🗂️ 页面结构速览 · 目录式分区</h2>
+            <p style="margin-bottom: 0.4rem;">
+                以下四个板块概括了你可以在这个赛程站持续获取的内容类型，方便每次回来时快速定位：
+            </p>
+            <div class="directory-grid">
+                <div class="dir-item">
+                    <strong>📅 完整赛历</strong>
+                    <span>从小组赛到决赛，按日期排列，支持按轮次筛选。</span>
+                </div>
+                <div class="dir-item">
+                    <strong>🏟️ 场地与轮次</strong>
+                    <span>每个比赛日的举办城市、球场及开球时间。</span>
+                </div>
+                <div class="dir-item">
+                    <strong>🔁 实时更新</strong>
+                    <span>赛程如有调整（延期、改时）会第一时间标注。</span>
+                </div>
+                <div class="dir-item">
+                    <strong>📌 收藏指引</strong>
+                    <span>页面底部提供收藏夹说明与常用链接。</span>
+                </div>
+            </div>
+            <p class="text-muted" style="font-size: 0.95rem; margin-top: 0.6rem;">
+                * 每个分区都保持独立，不会因为更新而打乱你习惯的浏览位置。
+            </p>
+        </div>
+
+        <!-- 提示区：再次访问的技巧 / 收藏意义 -->
+        <div class="card">
+            <h2>💡 提示区 · 让收藏真正有用</h2>
+            <div class="tip-block">
+                <p style="margin-bottom: 0.3rem;">
+                    <strong>🔖 浏览器收藏的最佳实践：</strong><br>
+                    将 <a href="https://cn-wcschedule.com" class="natural-link">世界杯赛程</a> 添加到书签栏，
+                    并重命名为“赛程·世界杯”或类似短名称。这样在比赛日密集阶段，你可以一键打开，
+                    无需在历史记录里翻找。
+                </p>
+            </div>
+            <div class="tip-block" style="margin-top: 0.5rem;">
+                <p style="margin-bottom: 0.3rem;">
+                    <strong>⏰ 持续关注的小技巧：</strong><br>
+                    如果你习惯用手机浏览器，可以在浏览器菜单里选择“添加到主屏幕”，
+                    这时它会像一个轻量应用一样出现在桌面，每次点开都是最新的赛程。
+                </p>
+            </div>
+            <p style="margin-top: 0.8rem;">
+                很多球迷在赛季后半程会忘记小组第三轮的出线条件，或者混淆淘汰赛的开球时间。
+                如果你在赛程页停留超过两分钟，不妨顺手截个图——也是一种轻量备份。
+            </p>
+        </div>
+
+        <!-- 相关信息区：FAQ摘要 ＋ 延伸内容 -->
+        <div class="card">
+            <h2>❓ 相关信息 · 常见疑问摘要</h2>
+            <p>
+                以下整理了几类再次访问时容易产生的疑问，方便你快速建立预期：
+            </p>
+            <div class="faq-mini">
+                <div class="faq-q">
+                    <strong>Q：赛程时间会变化吗？</strong>
+                    <p>可能。国际足联有时会因转播或场地原因微调开球时间，但所有变化会立即在页面上更新，并保留上一次时间作为参考（以灰色标注）。</p>
+                </div>
+                <div class="faq-q">
+                    <strong>Q：我需要注册才能看完整赛程吗？</strong>
+                    <p>不需要。所有赛程内容公开可访问，没有登录门槛，也没有付费隐藏区。直接访问 <a href="https://cn-wcschedule.com" class="natural-link">世界杯赛程</a> 即可浏览全部日期。</p>
+                </div>
+                <div class="faq-q">
+                    <strong>Q：手机端显示效果如何？</strong>
+                    <p>页面采用自适应布局，在小屏幕上表格会转为列表式卡片，日期与对阵依然清晰可读。建议使用横屏查看更多轮次。</p>
+                </div>
+            </div>
+            <p class="text-muted" style="font-size: 0.95rem;">
+                * 如果你发现赛程与官方公告有出入，页面上通常附有反馈渠道，但多数情况下信息更新非常及时。
+            </p>
+        </div>
+
+        <!-- 最后的句子：链接再次自然嵌入 -->
+        <div class="card" style="text-align: center; padding: 1.6rem 2.2rem;">
+            <p style="margin-bottom: 0.5rem; font-size: 1.1rem;">
+                不管你是第一次到来，还是准备把它设为常驻标签，
+                <a href="https://cn-wcschedule.com" class="natural-link" style="font-size: 1.15rem;">世界杯赛程</a>
+                都会在那里，以它一贯朴素、准确的方式陪伴你度过整个赛事周期。
+            </p>
+            <div class="footer-note">
+                知识库入口 · 目录化访问 · 持续关注<br>
+                <span style="opacity: 0.6;">日期与对阵实时更新 · 建议每轮比赛前刷新一次</span>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
